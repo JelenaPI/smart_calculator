@@ -35,6 +35,8 @@ def convert_to_postfix(data):
     return final
 
 def correct_input(data):  #  insert space around +-*/(),replace --- with - and -- with +,take value for variables
+    if data.startswith('-'):
+        data = "0 "+data
     while "---" in data:
         data = data.replace("---", '-')
     while '--' in data:
@@ -147,9 +149,7 @@ while True:
             print('Unknown variable')
     else:
         data = correct_input(data)
-        if len(data) == 2:
-            print(data[0]+data[1])
-        elif check_parenthesis(data):
+        if check_parenthesis(data):
             data = convert_to_postfix(data)
             try:
                 calculate(data)
